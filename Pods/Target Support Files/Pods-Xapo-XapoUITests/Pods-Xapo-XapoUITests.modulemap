@@ -1,0 +1,6 @@
+framework module Pods_Xapo_XapoUITests {
+  umbrella header "Pods-Xapo-XapoUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
