@@ -14,7 +14,7 @@ class GitHubListing: UIViewController {
     
     var viewModel = GitHubListingViewModel()
     private var cancellables = Set<AnyCancellable>()
-    let reuseIdentifier = "Cell"
+   
     
     // MARK: Outlets -
     
@@ -24,19 +24,19 @@ class GitHubListing: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "GitHub Trending List"
+        self.title = " Trending List"
         
         gitHubListingTable.dataSource = self
         gitHubListingTable.delegate = self
         
-        self.gitHubListingTable.register(UINib(nibName: "GitHubListCell", bundle: nil), forCellReuseIdentifier: reuseIdentifier)
+        self.gitHubListingTable.register(UINib(nibName: "GitHubListCell", bundle: nil), forCellReuseIdentifier: CellConstants.reuseIdentifier)
       
         viewModel.getGitHubListing()
       
-        viewModel.$trendingGitHubList
+        viewModel.trendingGitHubListing
             .receive(on: RunLoop.main)
             .sink { [weak self] _ in
-                self?.gitHubListingTable.reloadData()
+                self?.gitHubListingTable.reloadWithAnimation()
             }
             .store(in: &cancellables)
         
@@ -52,14 +52,12 @@ extension GitHubListing: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = gitHubListingTable.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! GitHubListCell
+        let cell = gitHubListingTable.dequeueReusableCell(withIdentifier:  CellConstants.reuseIdentifier, for: indexPath) as! GitHubListCell
         
-        viewModel.$trendingGitHubList
+        viewModel.trendingGitHubListing
             .receive(on: RunLoop.main)
             .sink { gitHubModel in
-                if let gitHubModel = gitHubModel {
                     cell.configureCell(with: gitHubModel[indexPath.row])
-                }
             }
             .store(in: &cancellables)
         
@@ -67,17 +65,23 @@ extension GitHubListing: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+       
         let gitHubDetails = GitHubLinkDetails()
         tableView.deselectRow(at: indexPath, animated: true)
-        viewModel.$trendingGitHubList
+       
+        viewModel.trendingGitHubListing
             .receive(on: RunLoop.main)
-            .sink { githublist in
-                if let githublist = githublist {
-                    gitHubDetails.githubDetails.send(githublist[indexPath.row])
-                }
+            .sink { githublistpass in
+              
+
+                gitHubDetails.githubDetails.send(githublistpass[indexPath.row])
+                
+             
+               
             }
             .store(in: &cancellables)
-        navigationController?.pushViewController(gitHubDetails, animated: true)
+        self.navigationController?.pushViewController(gitHubDetails, animated: true)
+
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -85,3 +89,5 @@ extension GitHubListing: UITableViewDataSource, UITableViewDelegate {
     }
     
 }
+
+

@@ -11,7 +11,8 @@ class GitHubListingViewModel {
     
     //MARK: variables -
     
-    @Published var trendingGitHubList : [GitHubModel]?
+   // @Published var trendingGitHubList : [GitHubModel]?
+    var trendingGitHubListing = CurrentValueSubject<[GitHubModel],Never>([GitHubModel]())
     private var cancellables = Set<AnyCancellable>()
     var networkManager : NetworkManagerProtocol
     
@@ -33,7 +34,8 @@ class GitHubListingViewModel {
                 }
             }
     receiveValue: { [weak self] githubList in
-        self?.trendingGitHubList = githubList
+       // self?.trendingGitHubList = githubList
+        self?.trendingGitHubListing.send(githubList)
     }
     .store(in: &cancellables)
     }
@@ -42,17 +44,19 @@ class GitHubListingViewModel {
     
     func getListCount() -> Int {
         
-        return trendingGitHubList?.count ?? 0
+        return trendingGitHubListing.value.count
     }
     // MARK: - github name to display in table view-
     
     func getGitHubName(index: Int) -> String{
-        return trendingGitHubList?[index].name ?? "Github Name Not Available"
+      
+        return trendingGitHubListing.value[index].name ?? "GitHub Name"
     }
     // MARK: - Author name to display in table view-
     
     func getAuthorName(index: Int) -> String{
-        return trendingGitHubList?[index].author ?? "Author Name Not Available"
+       
+        return trendingGitHubListing.value[index].author ?? "Author Name Not Available"
     }
     
     

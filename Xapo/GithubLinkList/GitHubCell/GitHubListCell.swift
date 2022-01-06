@@ -16,7 +16,7 @@ class GitHubListCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        gitHubName.focusEffect
+       
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -27,7 +27,7 @@ class GitHubListCell: UITableViewCell {
     func configureCell(with gitHubModel: GitHubModel ){
         gitHubName.text = "GitHub Name: \(gitHubModel.name ?? "Github Name not available")"
         authorName.text = " Github Author\(gitHubModel.author ?? "Author Name not available")"
-        gitHubImage.sd_setImage(with: URL(string: gitHubModel.avatar ?? ""), placeholderImage:UIImage(contentsOfFile:"placeholder.png"))
+        gitHubImage.sd_setImage(with: URL(string: gitHubModel.avatar ?? ""), placeholderImage:UIImage(contentsOfFile:"PlaceholderImage"))
         
     }
 }

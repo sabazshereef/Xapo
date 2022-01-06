@@ -29,7 +29,7 @@
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="29" translatesAutoresizingMaskIntoConstraints="NO" id="hkd-Tn-IZ9">
                     <rect key="frame" x="10" y="54" width="394" height="182.5"/>
                     <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zxX-Pa-2h3" customClass="RoundedImageView" customModule="Xapo" customModuleProvider="target">
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PlaceholderImage" translatesAutoresizingMaskIntoConstraints="NO" id="zxX-Pa-2h3" customClass="RoundedImageView" customModule="Xapo" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="182.5" height="182.5"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="zxX-Pa-2h3" secondAttribute="height" multiplier="1:1" id="xCc-Xb-QW7"/>
@@ -111,7 +111,13 @@
             <point key="canvasLocation" x="137.68115942028987" y="97.767857142857139"/>
         </view>
     </objects>
+    <designables>
+        <designable name="zxX-Pa-2h3">
+            <size key="intrinsicContentSize" width="600" height="498"/>
+        </designable>
+    </designables>
     <resources>
+        <image name="PlaceholderImage" width="600" height="498"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

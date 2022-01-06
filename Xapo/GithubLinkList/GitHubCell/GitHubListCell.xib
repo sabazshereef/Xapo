@@ -16,7 +16,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="97"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oBe-di-lM6" customClass="RoundedImageView" customModule="Xapo" customModuleProvider="target">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PlaceholderImage" translatesAutoresizingMaskIntoConstraints="NO" id="oBe-di-lM6" customClass="RoundedImageView" customModule="Xapo" customModuleProvider="target">
                         <rect key="frame" x="5" y="11" width="75" height="75"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="75" id="IM2-Bw-DCr"/>
@@ -60,4 +60,12 @@
             <point key="canvasLocation" x="137.68115942028987" y="115.51339285714285"/>
         </tableViewCell>
     </objects>
+    <designables>
+        <designable name="oBe-di-lM6">
+            <size key="intrinsicContentSize" width="600" height="498"/>
+        </designable>
+    </designables>
+    <resources>
+        <image name="PlaceholderImage" width="600" height="498"/>
+    </resources>
 </document>

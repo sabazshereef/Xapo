@@ -12,43 +12,55 @@ import Combine
 class XapoTests: XCTestCase {
     
     var sut: NetworkManager!
-    @Published var trendingGitHubList : [GitHubModel]?
+  
     private var cancellables = Set<AnyCancellable>()
     let dummyNetworkManagaer = DummyNetworkManger()
+    var trendingGitHubListingMock = CurrentValueSubject<[GitHubModel],Never>([GitHubModel]())
+    
     
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+      
         
-        let config = URLSessionConfiguration.ephemeral
-        config.protocolClasses = [MockURLProtocol.self]
-        let urlSession = URLSession(configuration: config)
-        sut = NetworkManager(urlSession: urlSession)
-        
+        dummyNetworkManagaer.getData(endpoint: "", type: [GitHubModel].self)
+            .sink { completiom in
+                
+            } receiveValue: { githubmodel in
+                self.trendingGitHubListingMock.send(githubmodel)
+                print("teting data",githubmodel)
+            }
+            .store(in: &cancellables)
+    
     }
     
     
     func testGetData_WhenSucessResponse(){
         
-        let dummyNetworkManagaer = DummyNetworkManger()
         let githublist = GitHubListingViewModel(networkManager: dummyNetworkManagaer)
         
-        XCTAssertEqual( githublist.trendingGitHubList?.count, nil)
+        XCTAssertEqual( githublist.trendingGitHubListing.value.count, 0)
         
         let promise = expectation(description: "start fetching github list")
         
-        githublist.$trendingGitHubList
+        githublist.trendingGitHubListing
             .sink { completion in
                 XCTFail()
             } receiveValue: { trendingList in
-                
+                print("tet printing -", trendingList)
                 promise.fulfill()
             }
             .store(in: &cancellables)
         wait(for: [promise], timeout: 0.5)
         
-
         
     }
 
-
+    func testDataMocking(){
+    
+        XCTAssertEqual(trendingGitHubListingMock.value.count, 1)
+        XCTAssertEqual(trendingGitHubListingMock.value[0].name, "jhon")
+        XCTAssertEqual(trendingGitHubListingMock.value[0].author, "@jhon12")
+        
+    }
+    
+}
     

@@ -11,9 +11,9 @@ import SDWebImage
 class GitHubLinkDetails: UIViewController {
     
     // MARK: Variables -
-    
-    var githubDetails = PassthroughSubject<GitHubModel,Never>()
+    var githubDetails = CurrentValueSubject<GitHubModel, Never>(GitHubModel(author: "No Data available", name: "No Data available", avatar: "No Data available", url: "No Data available", description: "No Data available", language: "No Data available", languageColor: "No Data available", stars: 0, forks: 0, currentPeriodStars: 0, builtBy: [BuiltBy(href: "No Data available", avatar: "No Data available", username: "No Data available")]))
     private var cancellables = Set<AnyCancellable>()
+    var Indexing = Int()
     
     // MARK: Outlets -
     
@@ -30,24 +30,29 @@ class GitHubLinkDetails: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+      
         self.getDetails()
+    
     }
     
 //MARK: Recieving data from table view -
     
     func getDetails() {
+       
+       
         githubDetails
-            .sink { [weak self] githubData in
-                self?.deployData(githubdata: githubData)
+            .sink{[weak self ] github in
+              
+                self?.deployData(githubdata: github)
             }
             .store(in: &cancellables)
+        
     }
 // MARK: Deploying Data to Fields -
     
     func deployData(githubdata: GitHubModel){
         
-        print(githubdata)
-        userImage.sd_setImage(with: URL(string: githubdata.builtBy[0].avatar ?? ""), placeholderImage:UIImage(contentsOfFile:"placeholder.png"))
+        userImage.sd_setImage(with: URL(string: githubdata.builtBy[0].avatar ?? ""), placeholderImage:UIImage(contentsOfFile:"PlaceholderImage"))
         
         self.username.text = "Username: \(githubdata.builtBy[0].username ?? "Username Empty")"
         self.profileLink.text = "Profile Link: \(githubdata.builtBy[0].href ?? "profile link empty")"
