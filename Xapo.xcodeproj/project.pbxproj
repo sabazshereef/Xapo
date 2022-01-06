@@ -150,15 +150,15 @@
 		41051D7C277F06EE00B38C44 /* Xapo */ = {
 			isa = PBXGroup;
 			children = (
+				41B925932784550D0039C95A /* HomePage */,
+				41051DB1277F3E9A00B38C44 /* GithubLinkList */,
+				415F04492781A94400946C72 /* GitHubLinkDetails */,
 				41B308DE278702250079F0C4 /* Extensions */,
 				41B92595278458720039C95A /* Constants */,
 				41B92594278455B00039C95A /* NetWorkManager */,
-				41B925932784550D0039C95A /* HomePage */,
 				41B9258F278453FC0039C95A /* Protocols */,
 				410A0B882782FC2900D2E631 /* CustomImage */,
 				410A0B852782FB7900D2E631 /* CustomButton */,
-				415F04492781A94400946C72 /* GitHubLinkDetails */,
-				41051DB1277F3E9A00B38C44 /* GithubLinkList */,
 				41051D7D277F06EE00B38C44 /* AppDelegate.swift */,
 				41051D86277F06F300B38C44 /* Assets.xcassets */,
 				41051D88277F06F300B38C44 /* LaunchScreen.storyboard */,

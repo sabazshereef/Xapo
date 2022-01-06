@@ -39,7 +39,6 @@ class GitHubLinkDetails: UIViewController {
     
     func getDetails() {
        
-       
         githubDetails
             .sink{[weak self ] github in
               
